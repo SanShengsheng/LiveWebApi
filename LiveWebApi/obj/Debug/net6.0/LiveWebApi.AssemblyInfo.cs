@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LiveWebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53a6e768e36b7baf11f59ff066cecafb9ec69146")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2f303c701c1d3f6a38840463d3050d6d5ab2536")]
 [assembly: System.Reflection.AssemblyProductAttribute("LiveWebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LiveWebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

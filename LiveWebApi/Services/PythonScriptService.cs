@@ -61,10 +61,10 @@ namespace LiveWebApi.Services
             process.StartInfo.Arguments = $"\"{_scriptFullPath}\" \"{liveId}\""; // 传入liveId参数
 
             // 核心：关闭输出重定向（解决乱码，且无需处理输出）
-            //process.StartInfo.UseShellExecute = false;
-            //process.StartInfo.CreateNoWindow = true;
-            //process.StartInfo.RedirectStandardOutput = false; // 不重定向输出
-            //process.StartInfo.RedirectStandardError = false;  // 不重定向错误
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+            process.StartInfo.RedirectStandardOutput = false; // 不重定向输出
+            process.StartInfo.RedirectStandardError = false;  // 不重定向错误
 
             // 4. 注册进程退出事件（清理活跃列表）
             process.EnableRaisingEvents = true;
