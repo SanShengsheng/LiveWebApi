@@ -2,9 +2,32 @@
   "openapi": "3.0.1",
   "info": {
     "title": "LiveWebApi",
-    "version": "1.0"
+    "description": "抖音直播抓取API + Vue前端服务",
+    "version": "v1"
   },
   "paths": {
+    "/api/PythonScript/StartDouyinFetch": {
+      "post": {
+        "tags": [
+          "PythonScript"
+        ],
+        "parameters": [
+          {
+            "name": "liveId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "869935219305"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/WeatherForecast": {
       "get": {
         "tags": [

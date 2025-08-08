@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "LiveWebApi.Controllers.PythonScriptController",
+    "Method": "StartDouyinFetch",
+    "RelativePath": "api/PythonScript/StartDouyinFetch",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "liveId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "LiveWebApi.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",

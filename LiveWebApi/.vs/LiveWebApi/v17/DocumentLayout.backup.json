@@ -1,12 +1,88 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\pythonscripts\\liveman.py||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|solutionrelative:pythonscripts\\liveman.py||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\pythonscripts\\ws_notifier.py||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|solutionrelative:pythonscripts\\ws_notifier.py||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "liveMan.py",
+              "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\PythonScripts\\liveMan.py",
+              "RelativeDocumentMoniker": "PythonScripts\\liveMan.py",
+              "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\PythonScripts\\liveMan.py",
+              "RelativeToolTip": "PythonScripts\\liveMan.py",
+              "ViewState": "AgIAAPsAAAAAAAAAAAAcwA8BAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-08-08T08:09:26.796Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-08T08:06:47.388Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ws_notifier.py",
+              "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\PythonScripts\\ws_notifier.py",
+              "RelativeDocumentMoniker": "PythonScripts\\ws_notifier.py",
+              "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\PythonScripts\\ws_notifier.py",
+              "RelativeToolTip": "PythonScripts\\ws_notifier.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-08-08T08:03:25.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAAB0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T07:32:49.233Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

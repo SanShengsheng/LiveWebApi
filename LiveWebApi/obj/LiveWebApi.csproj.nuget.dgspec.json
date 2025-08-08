@@ -51,33 +51,13 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Google.Protobuf": {
+            "Microsoft.AspNetCore.SignalR": {
               "target": "Package",
-              "version": "[3.31.1, )"
-            },
-            "Jint": {
-              "target": "Package",
-              "version": "[4.4.1, )"
-            },
-            "Microsoft.AspNet.WebApi.Client": {
-              "target": "Package",
-              "version": "[6.0.0, )"
-            },
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[13.0.3, )"
+              "version": "[1.2.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
-            },
-            "System.IO.Compression": {
-              "target": "Package",
-              "version": "[4.3.0, )"
-            },
-            "System.Net.WebSockets.Client": {
-              "target": "Package",
-              "version": "[4.3.2, )"
             }
           },
           "imports": [

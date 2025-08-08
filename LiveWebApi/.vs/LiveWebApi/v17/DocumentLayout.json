@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{36BED73D-6844-4FD8-855A-9D87920BE950}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\services\\douyinwebsocketservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{36BED73D-6844-4FD8-855A-9D87920BE950}|LiveWebApi.csproj|solutionrelative:services\\douyinwebsocketservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{36BED73D-6844-4FD8-855A-9D87920BE950}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\protobuf\\douyin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{36BED73D-6844-4FD8-855A-9D87920BE950}|LiveWebApi.csproj|solutionrelative:protobuf\\douyin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{36BED73D-6844-4FD8-855A-9D87920BE950}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\services\\douyinliveservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{36BED73D-6844-4FD8-855A-9D87920BE950}|LiveWebApi.csproj|solutionrelative:services\\douyinliveservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{36BED73D-6844-4FD8-855A-9D87920BE950}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\utils\\httputils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{36BED73D-6844-4FD8-855A-9D87920BE950}|LiveWebApi.csproj|solutionrelative:utils\\httputils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\controllers\\pythonscriptcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|solutionrelative:controllers\\pythonscriptcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Douyin.cs",
-              "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Protobuf\\Douyin.cs",
-              "RelativeDocumentMoniker": "Protobuf\\Douyin.cs",
-              "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Protobuf\\Douyin.cs",
-              "RelativeToolTip": "Protobuf\\Douyin.cs",
-              "ViewState": "AgIAAJcBAAAAAAAAAAAmwLMBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-08T05:19:33.381Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "DouyinWebSocketService.cs",
-              "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Services\\DouyinWebSocketService.cs",
-              "RelativeDocumentMoniker": "Services\\DouyinWebSocketService.cs",
-              "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Services\\DouyinWebSocketService.cs",
-              "RelativeToolTip": "Services\\DouyinWebSocketService.cs",
-              "ViewState": "AgIAAFYAAAAAAAAAAAAowNwAAAAAAAAAAAAAAA==",
+              "Title": "PythonScriptController.cs",
+              "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Controllers\\PythonScriptController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PythonScriptController.cs",
+              "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Controllers\\PythonScriptController.cs",
+              "RelativeToolTip": "Controllers\\PythonScriptController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-08T05:16:51.493Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DouyinLiveService.cs",
-              "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Services\\DouyinLiveService.cs",
-              "RelativeDocumentMoniker": "Services\\DouyinLiveService.cs",
-              "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Services\\DouyinLiveService.cs",
-              "RelativeToolTip": "Services\\DouyinLiveService.cs",
-              "ViewState": "AgIAALUAAAAAAAAAAAAQwAkBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-08T05:13:44.389Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HttpUtils.cs",
-              "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Utils\\HttpUtils.cs",
-              "RelativeDocumentMoniker": "Utils\\HttpUtils.cs",
-              "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Utils\\HttpUtils.cs",
-              "RelativeToolTip": "Utils\\HttpUtils.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAqwGwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-08T05:10:18.072Z",
+              "WhenOpened": "2025-08-08T08:14:36.632Z",
               "EditorCaption": ""
             }
           ]

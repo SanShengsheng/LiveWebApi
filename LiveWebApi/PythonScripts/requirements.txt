@@ -1,0 +1,5 @@
+betterproto==1.2.5
+py_mini_racer==0.6.0
+Requests==2.32.4
+websocket_client==1.8.0
+websockets==15.0.1
