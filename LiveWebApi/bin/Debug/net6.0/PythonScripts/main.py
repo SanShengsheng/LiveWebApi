@@ -3,7 +3,7 @@
 
 import sys
 from liveMan import DouyinLiveWebFetcher
-
+print(f"Python 解释器路径: {sys.executable}")
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         sys.exit(1)

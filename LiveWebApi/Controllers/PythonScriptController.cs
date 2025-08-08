@@ -16,29 +16,29 @@ namespace LiveWebApi.Controllers
         }
 
         /// <summary>
-        /// 启动抖音直播抓取脚本
+        /// 启动抖音直播抓取脚本（同一liveId不重复启动）
         /// </summary>
         /// <param name="liveId">直播间ID（如：495144572832）</param>
         /// <returns>执行结果</returns>
         [HttpPost("StartDouyinFetch")]
-        public async Task<IActionResult> StartDouyinFetch([FromQuery] string liveId= "869935219305")
+        public async Task<IActionResult> StartDouyinFetch([FromQuery] string liveId = "869935219305")
         {
             try
             {
                 var result = await _scriptService.ExecuteScriptAsync(liveId);
-                return Ok(result);
+                return Ok(new { Success = true, Message = result });
             }
             catch (ArgumentException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Success = false, Message = ex.Message });
             }
             catch (FileNotFoundException ex)
             {
-                return NotFound(ex.Message);
+                return NotFound(new { Success = false, Message = ex.Message });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.Message);
+                return StatusCode(500, new { Success = false, Message = ex.Message });
             }
         }
     }

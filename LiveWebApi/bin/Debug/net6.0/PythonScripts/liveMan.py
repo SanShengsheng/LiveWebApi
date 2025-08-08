@@ -60,7 +60,7 @@ def generateSignature(wss, script_file='sign.js'):
         signature = ctx.call("get_sign", md5_param)
         return signature
     except Exception as e:
-        ptttt=0 # print(e)
+        print(e)
 
 
 def generateMsToken(length=107):
@@ -91,6 +91,7 @@ class DouyinLiveWebFetcher:
         self.live_url = "https://live.douyin.com/"
         self.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) " \
                           "Chrome/120.0.0.0 Safari/537.36"
+        self.user_id = None
     
     def start(self):
         self._connectWebSocket()
@@ -113,7 +114,7 @@ class DouyinLiveWebFetcher:
             response = requests.get(self.live_url, headers=headers)
             response.raise_for_status()
         except Exception as err:
-            ptttt=0 # print("【X】Request the live url error: ", err)
+            print("【X】Request the live url error: ", err)
         else:
             self.__ttwid = response.cookies.get('ttwid')
             return self.__ttwid
@@ -135,11 +136,11 @@ class DouyinLiveWebFetcher:
             response = requests.get(url, headers=headers)
             response.raise_for_status()
         except Exception as err:
-            ptttt=0 # print("【X】Request the live room url error: ", err)
+            print("【X】Request the live room url error: ", err)
         else:
             match = re.search(r'roomId\\":\\"(\d+)\\"', response.text)
             if match is None or len(match.groups()) < 1:
-                ptttt=0 # print("【X】No match found for roomId")
+                print("【X】No match found for roomId")
             
             self.__room_id = match.group(1)
             
@@ -166,10 +167,12 @@ class DouyinLiveWebFetcher:
         data = resp.json().get('data')
         if data:
             room_status = data.get('room_status')
+            print('roomid：'+self.room_id)
             user = data.get('user')
             user_id = user.get('id_str')
             nickname = user.get('nickname')
-            ptttt=0 # print(f"【{nickname}】[{user_id}]直播间：{['正在直播', '已结束'][bool(room_status)]}.")
+            self.user_id = user_id
+            print(f"【{nickname}】[{user_id}]直播间：{['正在直播', '已结束'][bool(room_status)]}.")
             return {
               'room_status': room_status,
               'user_id': user_id,
@@ -225,7 +228,7 @@ class DouyinLiveWebFetcher:
                 heartbeat = PushFrame(payload_type='hb').SerializeToString()
                 self.ws.send(heartbeat, websocket.ABNF.OPCODE_PING)
             except Exception as e:
-                ptttt=0 # print("【X】心跳包检测错误: ", e)
+                print("【X】心跳包检测错误: ", e)
                 break
             else:
                 time.sleep(5)
@@ -234,7 +237,7 @@ class DouyinLiveWebFetcher:
         """
         连接建立成功
         """
-        ptttt=0 # print("【√】WebSocket连接成功.")
+        print("【√】WebSocket连接成功.")
         threading.Thread(target=self._sendHeartbeat).start()
     
     def _wsOnMessage(self, ws, message):
@@ -269,11 +272,11 @@ class DouyinLiveWebFetcher:
                 pass
     
     def _wsOnError(self, ws, error):
-        ptttt=0 # print("WebSocket error: ", error)
+        print("WebSocket error: ", error)
     
     def _wsOnClose(self, ws, *args):
         self.get_room_status()
-        ptttt=0 # print("WebSocket connection closed.")
+        print("WebSocket connection closed.")
     
     def _parseChatMsg(self, payload):
         """聊天消息"""
@@ -283,6 +286,7 @@ class DouyinLiveWebFetcher:
         content = message.content
         gender = message.user.gender
         data = {
+            "room_uid":self.user_id,
             "lt": "dy",
             "gender": gender,
             "user_id": user_id,
@@ -292,7 +296,7 @@ class DouyinLiveWebFetcher:
         local_time = time.localtime(now)
         formatted_time = time.strftime('%Y-%m-%d %H:%M:%S', local_time)
         notifier.send(json.dumps(data, ensure_ascii=False))
-        ptttt=0 # print(f"{formatted_time}【聊天消息】[{user_id}]{user_name}: {content}")
+        print(f"{formatted_time}【聊天消息】[{user_id}]{user_name}: {content}")
   
     
     def _parseControlMsg(self, payload):
@@ -300,10 +304,10 @@ class DouyinLiveWebFetcher:
         message = ControlMessage().parse(payload)
         
         if message.status == 3:
-            ptttt=0 # print("直播间已结束")
+            print("直播间已结束")
             self.stop()
     
     def _parseRoomStreamAdaptationMsg(self, payload):
         message = RoomStreamAdaptationMessage().parse(payload)
         adaptationType = message.adaptation_type
-        # ptttt=0 # print(f'直播间adaptation: {adaptationType}')
+        # print(f'直播间adaptation: {adaptationType}')

@@ -91,6 +91,7 @@ class DouyinLiveWebFetcher:
         self.live_url = "https://live.douyin.com/"
         self.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) " \
                           "Chrome/120.0.0.0 Safari/537.36"
+        self.user_id = None
     
     def start(self):
         self._connectWebSocket()
@@ -166,9 +167,11 @@ class DouyinLiveWebFetcher:
         data = resp.json().get('data')
         if data:
             room_status = data.get('room_status')
+            print('roomid：'+self.room_id)
             user = data.get('user')
             user_id = user.get('id_str')
             nickname = user.get('nickname')
+            self.user_id = user_id
             print(f"【{nickname}】[{user_id}]直播间：{['正在直播', '已结束'][bool(room_status)]}.")
             return {
               'room_status': room_status,
@@ -283,6 +286,7 @@ class DouyinLiveWebFetcher:
         content = message.content
         gender = message.user.gender
         data = {
+            "room_uid":self.user_id,
             "lt": "dy",
             "gender": gender,
             "user_id": user_id,
