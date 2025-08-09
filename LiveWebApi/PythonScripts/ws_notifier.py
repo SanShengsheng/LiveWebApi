@@ -138,6 +138,6 @@ def cleanup():
 
 atexit.register(cleanup)
 
-# 创建单例实例
-notifier = WSNotifier()
-print("[WSNotifier] Global notifier instance created")
+# 移除自动创建的全局实例
+# 如需使用，请在代码中显式创建: notifier = WSNotifier()
+# print("[WSNotifier] Global notifier instance created")

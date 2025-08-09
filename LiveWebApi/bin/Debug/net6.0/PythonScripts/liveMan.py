@@ -11,6 +11,7 @@ import subprocess
 import threading
 import time
 import urllib.parse
+import sys  # 导入sys模块用于终止进程
 from contextlib import contextmanager
 from unittest.mock import patch
 
@@ -20,7 +21,10 @@ from py_mini_racer import MiniRacer
 
 from protobuf.douyin import *
 import json
-from ws_notifier import notifier
+from ws_notifier import WSNotifier
+
+# 创建WSNotifier实例
+notifier = WSNotifier()
 
 @contextmanager
 def patched_popen_encoding(encoding='utf-8'):
@@ -350,11 +354,15 @@ class DouyinLiveWebFetcher:
                     print(f"尝试重新连接 ({self._reconnect_count}/{self._max_reconnects})... 等待 {reconnect_interval:.1f} 秒")
                     threading.Timer(reconnect_interval, self._reconnect).start()
                 else:
-                    print(f"已达到最大重连次数 ({self._max_reconnects})，停止尝试")
+                    print(f"已达到最大重连次数 ({self._max_reconnects})，停止尝试并终止进程")
+                    self.stop()
+                    sys.exit(0)  # 终止Python进程
             elif room_status and room_status.get('room_status') != 0:
                 print("直播已结束，不再尝试重连")
             else:
-                print("无法获取直播间状态，不再尝试重连")
+                print("无法获取直播间状态，不再尝试重连并终止进程")
+                self.stop()
+                sys.exit(0)  # 终止Python进程
         else:
             print("已收到停止信号，不再尝试重连")
     
@@ -365,17 +373,24 @@ class DouyinLiveWebFetcher:
         user_id = message.user.id
         content = message.content
         gender = message.user.gender
-        data = {
-            "room_uid":self.room_id,
-            "lt": "dy",
-            "gender": gender,
-            "user_id": user_id,
-            "user_name": user_name,
-            "content": content}
+        # 构建发送给服务器的消息，添加type字段避免广播
+        message = {
+            "type": "topic",
+            "topic": "server_messages",
+            "content": {
+                "room_id": self.room_id,
+                "room_port":"dylive",
+                "lt": "dy",
+                "gender": gender,
+                "user_id": user_id,
+                "user_name": user_name,
+                "content": content
+            }
+        }
         now = time.time()
         local_time = time.localtime(now)
         formatted_time = time.strftime('%Y-%m-%d %H:%M:%S', local_time)
-        notifier.send(json.dumps(data, ensure_ascii=False))
+        notifier.send(json.dumps(message, ensure_ascii=False))
         print(f"{formatted_time}【聊天消息】[{user_id}]{user_name}: {content}")
   
     

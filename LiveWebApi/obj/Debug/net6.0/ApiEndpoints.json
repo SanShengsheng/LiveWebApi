@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "LiveWebApi.Controllers.ProductController",
+    "Method": "SaveProductList",
+    "RelativePath": "api/Product/save-product-list",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productItems",
+        "Type": "System.Collections.Generic.List\u00601[[LiveWebApi.Controllers.ProductItem, LiveWebApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "LiveWebApi.Controllers.PythonScriptController",
     "Method": "StartDouyinFetch",
     "RelativePath": "api/PythonScript/StartDouyinFetch",

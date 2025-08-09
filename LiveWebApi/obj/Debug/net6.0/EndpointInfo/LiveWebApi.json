@@ -6,6 +6,46 @@
     "version": "v1"
   },
   "paths": {
+    "/api/Product/save-product-list": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductItem"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductItem"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductItem"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/PythonScript/StopDouyinFetch": {
       "post": {
         "tags": [
@@ -92,6 +132,40 @@
   },
   "components": {
     "schemas": {
+      "ProductItem": {
+        "type": "object",
+        "properties": {
+          "card_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "auth_type": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "operation": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "room_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "p_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "p_img": {
+            "type": "string",
+            "nullable": true
+          },
+          "p_id": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "WeatherForecast": {
         "type": "object",
         "properties": {

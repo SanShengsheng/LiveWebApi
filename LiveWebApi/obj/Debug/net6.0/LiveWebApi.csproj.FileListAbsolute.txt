@@ -85,4 +85,4 @@ D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\refint\LiveWebApi.dll
 D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\LiveWebApi.pdb
 D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\LiveWebApi.genruntimeconfig.cache
 D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\ref\LiveWebApi.dll
-D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt
+D:\Code\Code\C#\LiveRecommend\LiveWebApi\bin\Debug\net6.0\Data\7536490932191955752.json
