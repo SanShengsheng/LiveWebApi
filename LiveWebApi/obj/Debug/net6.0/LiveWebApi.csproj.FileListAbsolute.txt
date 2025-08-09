@@ -79,10 +79,10 @@ D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\staticwebassets.build.
 D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\staticwebassets.build.json.cache
 D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\staticwebassets.development.json
 D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\staticwebassets.build.endpoints.json
-D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt
 D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\LiveWebApi.csproj.Up2Date
 D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\LiveWebApi.dll
 D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\refint\LiveWebApi.dll
 D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\LiveWebApi.pdb
 D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\LiveWebApi.genruntimeconfig.cache
 D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\ref\LiveWebApi.dll
+D:\Code\Code\C#\LiveRecommend\LiveWebApi\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt

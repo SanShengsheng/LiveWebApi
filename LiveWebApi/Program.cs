@@ -9,17 +9,17 @@ using LiveWebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ÅäÖÃ Kestrel ¼àÌı¾ÖÓòÍø
+// ï¿½ï¿½ï¿½ï¿½ Kestrel ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
-    serverOptions.ListenAnyIP(8690); // HTTP ¶Ë¿Ú
-    serverOptions.ListenAnyIP(5001, opt => opt.UseHttps()); // HTTPS ¶Ë¿Ú
+    serverOptions.ListenAnyIP(8690); // HTTP ï¿½Ë¿ï¿½
+    serverOptions.ListenAnyIP(5001, opt => opt.UseHttps()); // HTTPS ï¿½Ë¿ï¿½
 });
 
-// Ìí¼Ó¿ØÖÆÆ÷Ö§³Ö
+// ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½
 builder.Services.AddControllers();
 
-// ×¢²á Swagger
+// ×¢ï¿½ï¿½ Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -27,27 +27,27 @@ builder.Services.AddSwaggerGen(c =>
     {
         Title = "LiveWebApi",
         Version = "v1",
-        Description = "¶¶ÒôÖ±²¥×¥È¡API + VueÇ°¶Ë·şÎñ"
+        Description = "ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½×¥È¡API + VueÇ°ï¿½Ë·ï¿½ï¿½ï¿½"
     });
 });
 
-// ×¢²á Python ½Å±¾·şÎñ£¨µ¥ÀıÄ£Ê½£¬È·±£×´Ì¬¹²Ïí£©
+// ×¢ï¿½ï¿½ Python ï¿½Å±ï¿½ï¿½ï¿½ï¿½ñ£¨µï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½È·ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 builder.Services.AddSingleton<PythonScriptService>();
 
-// ×¢²á Python ÅäÖÃÑ¡Ïî
+// ×¢ï¿½ï¿½ Python ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
 builder.Services.Configure<PythonSettings>(
     builder.Configuration.GetSection("PythonSettings")
 );
 
-// ×¢²á WebSocket ´¦ÀíÆ÷£¨µ¥Àı¹ÜÀíÁ¬½Ó£©
+// ×¢ï¿½ï¿½ WebSocket ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó£ï¿½
 builder.Services.AddSingleton<WebSocketHandler>();
 
-// ¿çÓòÅäÖÃ
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.AllowAnyOrigin()  // Éú²ú»·¾³Ìæ»»Îª¾ßÌåÇ°¶ËÓòÃû
+        policy.AllowAnyOrigin()  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ»»Îªï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -55,16 +55,32 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// ÅäÖÃÄ¬ÈÏÒ³Ãæ£¨VueÈë¿Ú£©
+// åœ¨åº”ç”¨å¯åŠ¨æ—¶å…³é—­æ‰€æœ‰ç°æœ‰WebSocketè¿æ¥
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var webSocketHandler = services.GetRequiredService<WebSocketHandler>();
+        await webSocketHandler.CloseAllConnectionsAsync();
+        Console.WriteLine("åº”ç”¨å¯åŠ¨æ—¶å·²å…³é—­æ‰€æœ‰ç°æœ‰WebSocketè¿æ¥");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"å…³é—­ç°æœ‰WebSocketè¿æ¥æ—¶å‡ºé”™: {ex.Message}");
+    }
+}
+
+// ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½Ò³ï¿½æ£¨Vueï¿½ï¿½Ú£ï¿½
 app.UseDefaultFiles(new DefaultFilesOptions
 {
     DefaultFileNames = new List<string> { "index.html" }
 });
 
-// ÆôÓÃ¾²Ì¬ÎÄ¼ş£¨Vue´ò°üÎÄ¼ş£©
+// ï¿½ï¿½ï¿½Ã¾ï¿½Ì¬ï¿½Ä¼ï¿½ï¿½ï¿½Vueï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 app.UseStaticFiles();
 
-// ¿ª·¢»·¾³ÆôÓÃSwagger
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Swagger
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -75,38 +91,38 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-// ÆôÓÃ¿çÓò
+// ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½
 app.UseCors("AllowFrontend");
 
-// ÆôÓÃ WebSocket Ö§³Ö
+// ï¿½ï¿½ï¿½ï¿½ WebSocket Ö§ï¿½ï¿½
 app.UseWebSockets();
 
-// HTTPSÖØ¶¨ÏòºÍÊÚÈ¨
+// HTTPSï¿½Ø¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨
 // app.UseHttpsRedirection();
 app.UseAuthorization();
 
-// APIÂ·ÓÉÓ³Éä
+// APIÂ·ï¿½ï¿½Ó³ï¿½ï¿½
 app.UseRouting();
 app.MapControllers();
 
-// WebSocket ¶ËµãÅäÖÃ
+// WebSocket ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½
 app.Map("/ws", async context =>
 {
     var handler = context.RequestServices.GetRequiredService<WebSocketHandler>();
     await handler.HandleWebSocketAsync(context, context.RequestAborted);
 });
 
-// Vue Router HistoryÄ£Ê½Ö§³Ö
+// Vue Router HistoryÄ£Ê½Ö§ï¿½ï¿½
 app.MapFallbackToFile("index.html");
 
 app.Run();
 
-// PythonÅäÖÃÄ£ĞÍ
+// Pythonï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
 namespace LiveWebApi
 {
     public class PythonSettings
     {
-        public string PythonPath { get; set; } = string.Empty; // Èç python.exe »ò python3
-        public string ScriptPath { get; set; } = "PythonScripts/main.py"; // Ïà¶ÔÊä³öÄ¿Â¼µÄÂ·¾¶
+        public string PythonPath { get; set; } = string.Empty; // ï¿½ï¿½ python.exe ï¿½ï¿½ python3
+        public string ScriptPath { get; set; } = "PythonScripts/main.py"; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Â¼ï¿½ï¿½Â·ï¿½ï¿½
     }
 }

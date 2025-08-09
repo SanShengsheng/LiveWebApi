@@ -50,7 +50,12 @@ def generateSignature(wss, script_file='sign.js'):
     md5.update(param.encode())
     md5_param = md5.hexdigest()
     
-    with codecs.open(script_file, 'r', encoding='utf8') as f:
+    import os
+    # 获取当前文件所在目录
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    # 构建sign.js的绝对路径
+    script_path = os.path.join(current_dir, script_file)
+    with codecs.open(script_path, 'r', encoding='utf8') as f:
         script = f.read()
     
     ctx = MiniRacer()
@@ -88,16 +93,50 @@ class DouyinLiveWebFetcher:
         self.__ttwid = None
         self.__room_id = None
         self.live_id = live_id
+        self._stopping = False  # 标记是否正在停止
+        self._reconnect_count = 0  # 重连次数计数
+        self._max_reconnects = 3  # 最大重连次数 (减少重连次数)
+        self._base_reconnect_interval = 5  # 基础重连间隔(秒) (增加重连间隔)
+        self._is_connected = False  # 连接状态标志
         self.live_url = "https://live.douyin.com/"
         self.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) " \
                           "Chrome/120.0.0.0 Safari/537.36"
         self.user_id = None
     
     def start(self):
+        # 重置状态
+        self._reconnect_count = 0
+        self._stopping = False
+        self._is_connected = False
         self._connectWebSocket()
+        
+    def _reconnect(self):
+        """重连方法"""
+        print(f"[重连管理] 尝试重连... 停止标志: {self._stopping}")
+        if not self._stopping:
+            print(f"[重连管理] 执行重连 (当前计数: {self._reconnect_count}/{self._max_reconnects})")
+            self._connectWebSocket()
+        else:
+            print("[重连管理] 已收到停止信号，取消重连")
     
     def stop(self):
-        self.ws.close()
+        self._stopping = True  # 设置停止标记
+        print("正在停止连接...")
+        # 停止心跳线程
+        self._heartbeat_running = False
+        if hasattr(self, '_heartbeat_thread') and self._heartbeat_thread.is_alive():
+            self._heartbeat_thread.join(timeout=2.0)
+            print("心跳线程已停止")
+        # 关闭WebSocket连接
+        if hasattr(self, 'ws') and self.ws:
+            try:
+                self.ws.close()
+                print("WebSocket连接已关闭")
+            except Exception as e:
+                print(f"关闭WebSocket连接时出错: {e}")
+        # 确保所有资源被释放
+        self.ws = None
+        print("资源已清理完毕")
     
     @property
     def ttwid(self):
@@ -167,12 +206,19 @@ class DouyinLiveWebFetcher:
         data = resp.json().get('data')
         if data:
             room_status = data.get('room_status')
-            print('roomid：'+self.room_id)
             user = data.get('user')
             user_id = user.get('id_str')
             nickname = user.get('nickname')
             self.user_id = user_id
-            print(f"【{nickname}】[{user_id}]直播间：{['正在直播', '已结束'][bool(room_status)]}.")
+            import sys
+            try:
+                # 尝试直接打印
+                print(f"【{nickname}】[{user_id}]直播间：{['正在直播', '已结束'][bool(room_status)]}.")
+            except UnicodeEncodeError:
+                # 尝试使用utf-8编码写入标准输出
+                output = f"【{nickname}】[{user_id}]直播间：{['正在直播', '已结束'][bool(room_status)]}.\n"
+                sys.stdout.buffer.write(output.encode('utf-8'))
+                sys.stdout.buffer.flush()
             return {
               'room_status': room_status,
               'user_id': user_id,
@@ -184,6 +230,12 @@ class DouyinLiveWebFetcher:
         """
         连接抖音直播间websocket服务器，请求直播间数据
         """
+        print(f"[连接管理] 尝试创建WebSocket连接... 停止标志: {self._stopping}, 当前连接状态: {self._is_connected}")
+        if self._stopping or self._is_connected:
+            print(f"[连接管理] 取消创建新连接: 停止标志={self._stopping}, 已连接={self._is_connected}")
+            return
+        self._is_connected = True
+
         wss = ("wss://webcast5-ws-web-hl.douyin.com/webcast/im/push/v2/?app_name=douyin_web"
                "&version_code=180800&webcast_sdk_version=1.0.14-beta.0"
                "&update_version_code=1.0.14-beta.0&compress=gzip&device_platform=web&cookie_enabled=true"
@@ -214,8 +266,10 @@ class DouyinLiveWebFetcher:
                                          on_error=self._wsOnError,
                                          on_close=self._wsOnClose)
         try:
+            print("[连接管理] 开始运行WebSocket连接")
             self.ws.run_forever()
-        except Exception:
+        except Exception as e:
+            print(f"[连接管理] WebSocket运行异常: {e}")
             self.stop()
             raise
     
@@ -223,22 +277,27 @@ class DouyinLiveWebFetcher:
         """
         发送心跳包
         """
-        while True:
+        while self._heartbeat_running:
             try:
-                heartbeat = PushFrame(payload_type='hb').SerializeToString()
-                self.ws.send(heartbeat, websocket.ABNF.OPCODE_PING)
+                if self.ws and self.ws.sock and self.ws.sock.connected:
+                    heartbeat = PushFrame(payload_type='hb').SerializeToString()
+                    self.ws.send(heartbeat, websocket.ABNF.OPCODE_PING)
             except Exception as e:
                 print("【X】心跳包检测错误: ", e)
                 break
             else:
                 time.sleep(5)
+        print("心跳线程已退出")
     
     def _wsOnOpen(self, ws):
         """
         连接建立成功
         """
         print("【√】WebSocket连接成功.")
-        threading.Thread(target=self._sendHeartbeat).start()
+        self._heartbeat_running = True
+        self._heartbeat_thread = threading.Thread(target=self._sendHeartbeat)
+        self._heartbeat_thread.daemon = True  # 设置为守护线程，主程序退出时自动终止
+        self._heartbeat_thread.start()
     
     def _wsOnMessage(self, ws, message):
         """
@@ -275,8 +334,29 @@ class DouyinLiveWebFetcher:
         print("WebSocket error: ", error)
     
     def _wsOnClose(self, ws, *args):
-        self.get_room_status()
-        print("WebSocket connection closed.")
+        self._is_connected = False
+        print(f"WebSocket connection closed. 停止标志: {self._stopping}")
+        # 自动重连逻辑
+        if not self._stopping:
+            room_status = self.get_room_status()
+            if room_status and room_status.get('room_status') == 0:
+                # 只有直播进行中才重连
+                if self._reconnect_count < self._max_reconnects:
+                    # 计算退避重连间隔 (指数退避)
+                    reconnect_interval = self._base_reconnect_interval * (2 ** self._reconnect_count)
+                    # 添加随机抖动，避免多个客户端同时重连
+                    reconnect_interval = reconnect_interval + random.uniform(0, 1)
+                    self._reconnect_count += 1
+                    print(f"尝试重新连接 ({self._reconnect_count}/{self._max_reconnects})... 等待 {reconnect_interval:.1f} 秒")
+                    threading.Timer(reconnect_interval, self._reconnect).start()
+                else:
+                    print(f"已达到最大重连次数 ({self._max_reconnects})，停止尝试")
+            elif room_status and room_status.get('room_status') != 0:
+                print("直播已结束，不再尝试重连")
+            else:
+                print("无法获取直播间状态，不再尝试重连")
+        else:
+            print("已收到停止信号，不再尝试重连")
     
     def _parseChatMsg(self, payload):
         """聊天消息"""
@@ -286,7 +366,7 @@ class DouyinLiveWebFetcher:
         content = message.content
         gender = message.user.gender
         data = {
-            "room_uid":self.user_id,
+            "room_uid":self.room_id,
             "lt": "dy",
             "gender": gender,
             "user_id": user_id,

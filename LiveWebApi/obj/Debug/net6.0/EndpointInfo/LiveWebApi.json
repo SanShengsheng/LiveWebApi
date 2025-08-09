@@ -2,10 +2,32 @@
   "openapi": "3.0.1",
   "info": {
     "title": "LiveWebApi",
-    "description": "抖音直播抓取API + Vue前端服务",
+    "description": "����ֱ��ץȡAPI + Vueǰ�˷���",
     "version": "v1"
   },
   "paths": {
+    "/api/PythonScript/StopDouyinFetch": {
+      "post": {
+        "tags": [
+          "PythonScript"
+        ],
+        "parameters": [
+          {
+            "name": "liveId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "869935219305"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/PythonScript/StartDouyinFetch": {
       "post": {
         "tags": [

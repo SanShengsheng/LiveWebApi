@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
@@ -10,8 +10,8 @@ namespace LiveWebApi.Services
     // 用于存储Python脚本配置（需在appsettings.json中配置）
     public class PythonSettings
     {
-        public string PythonPath { get; set; } // Python解释器路径（如：python.exe或/usr/bin/python3）
-        public string ScriptPath { get; set; } // 脚本相对路径（相对于项目输出目录）
+        public string PythonPath { get; set; } = null!; // Python解释器路径（如：python.exe或/usr/bin/python3）
+        public string ScriptPath { get; set; } = null!; // 脚本相对路径（相对于项目输出目录）
     }
 
     public class PythonScriptService
@@ -33,6 +33,58 @@ namespace LiveWebApi.Services
                 throw new InvalidOperationException("Python路径未在配置文件中设置（PythonSettings:PythonPath）");
             if (!File.Exists(_scriptFullPath))
                 throw new FileNotFoundException("Python脚本文件不存在", _scriptFullPath);
+        }
+
+        /// <summary>
+        /// 停止Python脚本（异步非阻塞）
+        /// </summary>
+        public Task<string> StopScriptAsync(string liveId)
+        {
+            if (string.IsNullOrWhiteSpace(liveId))
+                throw new ArgumentException("liveId不能为空", nameof(liveId));
+
+            // 检查是否在运行
+            if (!_activeProcesses.TryGetValue(liveId, out var process))
+            {
+                return Task.FromResult($"直播间 {liveId} 未在监听中，无需停止");
+            }
+
+            try
+            {
+                // 尝试优雅关闭进程
+                if (!process.HasExited)
+                {
+                    try
+                    {
+                        // 先尝试优雅关闭（发送SIGTERM信号）
+                        process.CloseMainWindow();
+                        if (!process.WaitForExit(1000)) // 等待1秒
+                        {
+                            // 优雅关闭失败，强制终止
+                            process.Kill();
+                            process.WaitForExit(2000); // 等待进程退出，最多等待2秒
+                        }
+                    }
+                    catch
+                    {
+                        // 关闭主窗口失败，直接强制终止
+                        process.Kill();
+                        process.WaitForExit(2000);
+                    }
+                }
+                
+                // 从活跃列表移除
+                _activeProcesses.TryRemove(liveId, out _);
+                process.Dispose();
+                return Task.FromResult($"直播间 {liveId} 监听任务已停止");
+            }
+            catch (Exception ex)
+            {
+                // 清理状态
+                _activeProcesses.TryRemove(liveId, out _);
+                process?.Dispose();
+                throw new Exception($"停止监听任务失败：{ex.Message}");
+            }
         }
 
         /// <summary>
@@ -60,11 +112,30 @@ namespace LiveWebApi.Services
             process.StartInfo.FileName = _pythonSettings.PythonPath;
             process.StartInfo.Arguments = $"\"{_scriptFullPath}\" \"{liveId}\""; // 传入liveId参数
 
-            // 核心：关闭输出重定向（解决乱码，且无需处理输出）
+            // 启用输出重定向以便捕获Python输出
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.RedirectStandardOutput = false; // 不重定向输出
-            process.StartInfo.RedirectStandardError = false;  // 不重定向错误
+            process.StartInfo.RedirectStandardOutput = true; // 重定向输出
+            process.StartInfo.RedirectStandardError = true;  // 重定向错误
+
+            // 注册输出接收事件
+            process.OutputDataReceived += (sender, e) =>
+            {
+                if (!string.IsNullOrEmpty(e.Data))
+                {
+                    Console.WriteLine($"[Python Output] {e.Data}");
+                }
+            };
+
+            // 注册错误接收事件
+            process.ErrorDataReceived += (sender, e) =>
+            {
+                if (!string.IsNullOrEmpty(e.Data))
+                {
+                    Console.WriteLine($"[Python Error] {e.Data}");
+                }
+            };
+
 
             // 4. 注册进程退出事件（清理活跃列表）
             process.EnableRaisingEvents = true;
@@ -79,6 +150,9 @@ namespace LiveWebApi.Services
             {
                 // 5. 启动进程（不等待完成，立即返回）
                 process.Start();
+                // 开始异步读取输出
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
                 return Task.FromResult($"直播间 {liveId} 监听任务已启动");
             }
             catch (Exception ex)

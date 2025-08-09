@@ -3,16 +3,36 @@
   "WorkspaceRootPath": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\pythonscripts\\liveman.py||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|solutionrelative:pythonscripts\\liveman.py||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\services\\pythonscriptservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|solutionrelative:services\\pythonscriptservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\controllers\\pythonscriptcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|solutionrelative:controllers\\pythonscriptcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\pythonscripts\\sign.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|solutionrelative:pythonscripts\\sign.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\pythonscripts\\sign_v0.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|solutionrelative:pythonscripts\\sign_v0.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\pythonscripts\\ws_notifier.py||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|solutionrelative:pythonscripts\\ws_notifier.py||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\pythonscripts\\main.py||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|solutionrelative:pythonscripts\\main.py||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\controllers\\pythonscriptcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|solutionrelative:controllers\\pythonscriptcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|d:\\code\\code\\c#\\liverecommend\\livewebapi\\handlers\\websockethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DEB8D4A6-DE35-4CBA-B2EB-276838118F68}|LiveWebApi.csproj|solutionrelative:handlers\\websockethandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,11 +42,60 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
+              "Title": "sign.js",
+              "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\PythonScripts\\sign.js",
+              "RelativeDocumentMoniker": "PythonScripts\\sign.js",
+              "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\PythonScripts\\sign.js",
+              "RelativeToolTip": "PythonScripts\\sign.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAD0ugAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-08T11:00:45.797Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "sign_v0.js",
+              "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\PythonScripts\\sign_v0.js",
+              "RelativeDocumentMoniker": "PythonScripts\\sign_v0.js",
+              "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\PythonScripts\\sign_v0.js",
+              "RelativeToolTip": "PythonScripts\\sign_v0.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAD0ugAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-08-08T11:00:35.114Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ws_notifier.py",
+              "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\PythonScripts\\ws_notifier.py",
+              "RelativeDocumentMoniker": "PythonScripts\\ws_notifier.py",
+              "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\PythonScripts\\ws_notifier.py",
+              "RelativeToolTip": "PythonScripts\\ws_notifier.py",
+              "ViewState": "AgIAACUAAAAAAAAAAAAMwEIAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-08-08T11:00:27.232Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "liveMan.py",
+              "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\PythonScripts\\liveMan.py",
+              "RelativeDocumentMoniker": "PythonScripts\\liveMan.py",
+              "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\PythonScripts\\liveMan.py",
+              "RelativeToolTip": "PythonScripts\\liveMan.py",
+              "ViewState": "AgIAACABAAAAAAAAAADgv3ABAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-08-08T10:56:55.933Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "main.py",
               "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\PythonScripts\\main.py",
               "RelativeDocumentMoniker": "PythonScripts\\main.py",
@@ -44,22 +113,34 @@
               "RelativeDocumentMoniker": "Controllers\\PythonScriptController.cs",
               "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Controllers\\PythonScriptController.cs",
               "RelativeToolTip": "Controllers\\PythonScriptController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-08T08:41:40.934Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "PythonScriptService.cs",
               "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Services\\PythonScriptService.cs",
               "RelativeDocumentMoniker": "Services\\PythonScriptService.cs",
               "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Services\\PythonScriptService.cs",
               "RelativeToolTip": "Services\\PythonScriptService.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAUwEIAAABHAAAAAAAAAA==",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAtwGYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-08T08:26:38.595Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "WebSocketHandler.cs",
+              "DocumentMoniker": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Handlers\\WebSocketHandler.cs",
+              "RelativeDocumentMoniker": "Handlers\\WebSocketHandler.cs",
+              "ToolTip": "D:\\Code\\Code\\C#\\LiveRecommend\\LiveWebApi\\Handlers\\WebSocketHandler.cs",
+              "RelativeToolTip": "Handlers\\WebSocketHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-08T10:20:24.181Z"
             }
           ]
         }

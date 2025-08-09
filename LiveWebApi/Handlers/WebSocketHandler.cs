@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 using System.Net.WebSockets;
@@ -51,7 +51,22 @@ namespace LiveWebApi.Handlers
                     {
                         var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
                         _logger.LogInformation($"收到消息 [{connectionId}]: {message}");
-                        await BroadcastMessageAsync(connectionId, message);
+                        
+                        // 处理心跳消息
+                        if (message == "heartbeat")
+                        {
+                            // 回复心跳确认
+                            var response = Encoding.UTF8.GetBytes("heartbeat_ack");
+                            await webSocket.SendAsync(
+                                new ArraySegment<byte>(response),
+                                WebSocketMessageType.Text,
+                                true,
+                                cancellationToken);
+                        }
+                        else
+                        {
+                            await BroadcastMessageAsync(connectionId, message);
+                        }
                     }
                     else if (result.MessageType == WebSocketMessageType.Close)
                     {
@@ -63,6 +78,10 @@ namespace LiveWebApi.Handlers
                     }
 
                 } while (!result.CloseStatus.HasValue && !cancellationToken.IsCancellationRequested);
+            }
+            catch (OperationCanceledException)
+            {
+                _logger.LogInformation($"连接已取消: {connectionId}");
             }
             catch (Exception ex)
             {
@@ -76,7 +95,7 @@ namespace LiveWebApi.Handlers
         }
 
         // 广播消息到所有连接
-        public async Task BroadcastMessageAsync(string senderId, string message)
+        public async Task BroadcastMessageAsync(string senderId, string message, CancellationToken cancellationToken = default)
         {
             var broadcastMessage = Encoding.UTF8.GetBytes($"[{senderId}]: {message}");
             foreach (var (id, client) in _connections)
@@ -87,12 +106,40 @@ namespace LiveWebApi.Handlers
                         new ArraySegment<byte>(broadcastMessage),
                         WebSocketMessageType.Text,
                         true,
-                        CancellationToken.None);
+                        cancellationToken);
                 }
             }
         }
 
         // 获取当前连接数
         public int GetConnectionCount() => _connections.Count;
+
+        // 关闭所有连接
+        public async Task CloseAllConnectionsAsync(CancellationToken cancellationToken = default)
+        {
+            _logger.LogInformation("正在关闭所有WebSocket连接...");
+            var connections = _connections.ToList();
+            foreach (var (id, client) in connections)
+            {
+                if (client.State == WebSocketState.Open)
+                {
+                    try
+                    {
+                        await client.CloseAsync(
+                            WebSocketCloseStatus.NormalClosure,
+                            "服务器重启",
+                            cancellationToken
+                        );
+                        _logger.LogInformation($"已关闭连接: {id}");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, $"关闭连接 {id} 时出错");
+                    }
+                }
+                _connections.TryRemove(id, out _);
+            }
+            _logger.LogInformation($"所有连接已关闭，剩余连接数: {_connections.Count}");
+        }
     }
 }
